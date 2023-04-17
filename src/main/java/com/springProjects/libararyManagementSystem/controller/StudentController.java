@@ -10,6 +10,8 @@ import com.springProjects.libararyManagementSystem.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/student")
 public class StudentController {
@@ -20,17 +22,28 @@ public class StudentController {
     public String addStudent(@RequestBody StudentReqDto studentReqDto){
         return studentService.addStudent(studentReqDto);
     }
+
+    //update student's mobile number
     @PutMapping("/update-mobile")
     public UpdateStudentMobNoResDto updateMobNo(@RequestBody UpdateStudentMobNoReqDto updateStudentMobNoDto) throws StudentNotFoundException {
         return studentService.updateMobNo(updateStudentMobNoDto);
     }
+    //delete a student by id
     @DeleteMapping("/deleteStudent")
     public String deleteStudentById(@RequestBody IDReqDto idReqDto) throws StudentNotFoundException {
         return studentService.deleteStudentById(idReqDto);
     }
 
+    //find a student by id
     @GetMapping("/get-student")
-    public StudentResDto updateStudentByID(@RequestBody IDReqDto idReqDto) throws StudentNotFoundException {
-        return studentService.updateStudentByID(idReqDto);
+    public StudentResDto getStudentById(@RequestBody IDReqDto idReqDto) throws StudentNotFoundException {
+        return studentService.getStudentById(idReqDto);
     }
+
+    //find all the students
+    @GetMapping("/get-All-Students")
+    public List<StudentResDto>  getAllStudents(){
+        return studentService.getAllStudents();
+    }
+
 }

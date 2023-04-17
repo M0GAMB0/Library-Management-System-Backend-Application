@@ -4,9 +4,7 @@ import com.springProjects.libararyManagementSystem.DTOs.ReqDto.BookReqDto;
 import com.springProjects.libararyManagementSystem.DTOs.ReqDto.IDReqDto;
 import com.springProjects.libararyManagementSystem.DTOs.ResDto.BookResDto;
 import com.springProjects.libararyManagementSystem.exception.AuthorNotFoundException;
-import com.springProjects.libararyManagementSystem.model.Book;
 import com.springProjects.libararyManagementSystem.service.BookService;
-import lombok.Getter;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

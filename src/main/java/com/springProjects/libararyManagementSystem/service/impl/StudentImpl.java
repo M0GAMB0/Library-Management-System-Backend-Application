@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class StudentImpl implements StudentService{
@@ -82,7 +84,7 @@ public class StudentImpl implements StudentService{
     }
 
     @Override
-    public StudentResDto updateStudentByID(IDReqDto idReqDto) throws StudentNotFoundException {
+    public StudentResDto getStudentById(IDReqDto idReqDto) throws StudentNotFoundException {
         try{
             Student student=studentRepository.findById(idReqDto.getId()).get();
             StudentResDto studentResDto=new StudentResDto();
@@ -93,9 +95,9 @@ public class StudentImpl implements StudentService{
 
             //preparing card DTO
             CardResDto cardResDto=new CardResDto();
-            cardResDto.setIssueDate(studentResDto.getCard().getIssueDate());
-            cardResDto.setLastUpdated(studentResDto.getCard().getLastUpdated());
-            cardResDto.setStatus(studentResDto.getCard().getStatus());
+            cardResDto.setIssueDate(student.getCard().getIssueDate());
+            cardResDto.setLastUpdated(student.getCard().getLastUpdated());
+            cardResDto.setStatus(student.getCard().getStatus());
             cardResDto.setValidTill(student.getCard().getValidTill());
 
             studentResDto.setCard(cardResDto);
@@ -105,5 +107,31 @@ public class StudentImpl implements StudentService{
         catch(Exception e){
             throw new StudentNotFoundException("Invalid Student Id");
         }
+    }
+
+    @Override
+    public List<StudentResDto> getAllStudents() {
+        List<StudentResDto> res=new ArrayList<>();
+
+        List<Student> students=studentRepository.findAll();
+        for(Student student:students){
+            StudentResDto studentResDto=new StudentResDto();
+            studentResDto.setName(student.getName());
+            studentResDto.setDepartment(student.getDepartment());
+            studentResDto.setAge(student.getAge());
+            studentResDto.setMobNo(student.getMobNo());
+
+            //preparing card DTO
+            CardResDto cardResDto=new CardResDto();
+            cardResDto.setIssueDate(student.getCard().getIssueDate());
+            cardResDto.setLastUpdated(student.getCard().getLastUpdated());
+            cardResDto.setStatus(student.getCard().getStatus());
+            cardResDto.setValidTill(student.getCard().getValidTill());
+
+            studentResDto.setCard(cardResDto);
+
+            res.add(studentResDto);
+        }
+        return res;
     }
 }
