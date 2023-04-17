@@ -1,40 +1,23 @@
-package com.springProjects.libararyManagementSystem.model;
+package com.springProjects.libararyManagementSystem.DTOs.ResDto;
 
 import com.springProjects.libararyManagementSystem.enums.CardStatus;
-import jakarta.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.util.Date;
-
-@Entity
-@Table(name = "Card")
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-public class Card {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cardId;
-
-    @CreationTimestamp
+public class CardResDto {
     private LocalDate issueDate;
-
-    @UpdateTimestamp
     private Date lastUpdated;
-
-    @Enumerated(EnumType.STRING)
     private CardStatus status;
-
     private LocalDate validTill;
-
-    @OneToOne
-    @JoinColumn
-    Student student;
 }

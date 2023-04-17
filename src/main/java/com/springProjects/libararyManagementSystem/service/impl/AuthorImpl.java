@@ -1,5 +1,6 @@
 package com.springProjects.libararyManagementSystem.service.impl;
 
+import com.springProjects.libararyManagementSystem.DTOs.ReqDto.AuthorReqDto;
 import com.springProjects.libararyManagementSystem.model.Author;
 import com.springProjects.libararyManagementSystem.repository.AuthorRepository;
 import com.springProjects.libararyManagementSystem.service.AuthorService;
@@ -12,7 +13,13 @@ public class AuthorImpl implements AuthorService {
     AuthorRepository authorRepository;
 
     @Override
-    public String addAuthor(Author author) {
+    public String addAuthor(AuthorReqDto authorReqDto) {
+        //Converting DTO to Entity
+        Author author = new Author();
+        author.setAge(authorReqDto.getAge());
+        author.setName(authorReqDto.getName());
+        author.setEmail(authorReqDto.getEmail());
+
         authorRepository.save(author);
         return "Author added";
     }

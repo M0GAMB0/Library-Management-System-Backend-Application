@@ -1,6 +1,11 @@
 package com.springProjects.libararyManagementSystem.controller;
 
-import com.springProjects.libararyManagementSystem.model.Student;
+import com.springProjects.libararyManagementSystem.DTOs.ReqDto.IDReqDto;
+import com.springProjects.libararyManagementSystem.DTOs.ReqDto.StudentReqDto;
+import com.springProjects.libararyManagementSystem.DTOs.ReqDto.UpdateStudentMobNoReqDto;
+import com.springProjects.libararyManagementSystem.DTOs.ResDto.StudentResDto;
+import com.springProjects.libararyManagementSystem.DTOs.ResDto.UpdateStudentMobNoResDto;
+import com.springProjects.libararyManagementSystem.exception.StudentNotFoundException;
 import com.springProjects.libararyManagementSystem.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +17,20 @@ public class StudentController {
     @Autowired
     StudentService studentService;
     @PostMapping("/addStudent")
-    public String addStudent(@RequestBody Student student){
-        return studentService.addStudent(student);
+    public String addStudent(@RequestBody StudentReqDto studentReqDto){
+        return studentService.addStudent(studentReqDto);
+    }
+    @PutMapping("/update-mobile")
+    public UpdateStudentMobNoResDto updateMobNo(@RequestBody UpdateStudentMobNoReqDto updateStudentMobNoDto) throws StudentNotFoundException {
+        return studentService.updateMobNo(updateStudentMobNoDto);
     }
     @DeleteMapping("/deleteStudent")
-    public String deleteStudentById(@RequestParam int studentId){
-        return studentService.deleteStudentById(studentId);
+    public String deleteStudentById(@RequestBody IDReqDto idReqDto) throws StudentNotFoundException {
+        return studentService.deleteStudentById(idReqDto);
+    }
+
+    @GetMapping("/get-student")
+    public StudentResDto updateStudentByID(@RequestBody IDReqDto idReqDto) throws StudentNotFoundException {
+        return studentService.updateStudentByID(idReqDto);
     }
 }
