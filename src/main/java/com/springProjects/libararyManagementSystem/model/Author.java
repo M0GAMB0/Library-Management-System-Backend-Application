@@ -19,14 +19,11 @@ public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int authorId;
-
-    private String name;
-
-    private int age;
-
-    private String email;
-
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-    List<Book> books =new ArrayList<>();
+    List<Book> books = new ArrayList<>();
+    private String name;
+    private int age;
+    @Column(unique = true)
+    private String email;
 
 }

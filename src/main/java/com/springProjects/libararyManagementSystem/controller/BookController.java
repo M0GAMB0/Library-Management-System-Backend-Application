@@ -5,33 +5,31 @@ import com.springProjects.libararyManagementSystem.DTOs.ReqDto.IDReqDto;
 import com.springProjects.libararyManagementSystem.DTOs.ResDto.BookResDto;
 import com.springProjects.libararyManagementSystem.exception.AuthorNotFoundException;
 import com.springProjects.libararyManagementSystem.service.BookService;
-import org.springframework.web.bind.annotation.*;
-
+import com.springProjects.libararyManagementSystem.service.impl.BookImpl;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
-@RestController
 @RequestMapping("/book")
-public class BookController {
-    BookService bookService;
-    @PostMapping("/add-book")
-    public String addBook(@RequestBody BookReqDto bookReqDto) throws Exception{
+@RestController
+public class BookController{
+    BookService bookService=new BookImpl();
+    @PostMapping("/add-books")
+    public String addBook(BookReqDto bookReqDto) throws AuthorNotFoundException {
         return bookService.addBook(bookReqDto);
     }
-
-    //find all the books
-    @GetMapping("/getAllBooks")
+    @GetMapping("/get-all-books")
     public List<BookResDto> getAllBooks(){
         return bookService.getAllBooks();
     }
-
-    //find all the books of particular authorID
-    @GetMapping("/get-books-of-author")
-    public List<BookResDto> getBookByAuthorID(@RequestBody IDReqDto idReqDto) throws AuthorNotFoundException {
+    @GetMapping("/get-books-by-author-id")
+    public List<BookResDto> getBooksByAuthorId(IDReqDto idReqDto) throws AuthorNotFoundException {
         return bookService.getBooksByAuthorId(idReqDto);
     }
-    //find no of book written by an author
-    @GetMapping("/number-Of-Books-Written-By-Author")
-    public int getNumberOfBooksWrittenByAuthor(@RequestBody IDReqDto idReqDto) throws AuthorNotFoundException {
+    @GetMapping("/get-number-of-books-written-by-author")
+    public int getNumberOfBooksWrittenByAuthor(IDReqDto idReqDto) throws AuthorNotFoundException {
         return bookService.getNumberOfBooksWrittenByAuthor(idReqDto);
     }
 }

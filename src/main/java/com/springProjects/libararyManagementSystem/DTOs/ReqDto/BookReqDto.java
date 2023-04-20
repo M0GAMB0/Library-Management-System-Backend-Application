@@ -14,5 +14,12 @@ public class BookReqDto {
     private Genre genre;
     private int noOfPages;
     private int price;
-    private IDReqDto idReqDto;
+    private IDReqDto author;
+    public void println(){
+        System.out.println("This is title : " +title);
+        System.out.println("This is genre : " +genre.toString());
+        System.out.println("This is noOfPages : "+noOfPages);
+        System.out.println("This is price : "+price);
+        System.out.println("This is authorId : "+author.getId());
+    }
 }

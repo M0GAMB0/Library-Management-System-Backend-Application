@@ -11,7 +11,8 @@ import java.util.List;
 
 @Service
 public interface BookService {
-    public String addBook(BookReqDto bookReqDto) throws Exception;
+
+    public String addBook(BookReqDto bookReqDto) throws AuthorNotFoundException;
     public List<BookResDto> getAllBooks();
     public List<BookResDto> getBooksByAuthorId(IDReqDto idReqDto) throws AuthorNotFoundException;
     public int getNumberOfBooksWrittenByAuthor(IDReqDto idReqDto) throws AuthorNotFoundException;

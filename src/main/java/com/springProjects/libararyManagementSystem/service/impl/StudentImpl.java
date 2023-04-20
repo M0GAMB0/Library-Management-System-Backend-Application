@@ -90,7 +90,7 @@ public class StudentImpl implements StudentService{
             StudentResDto studentResDto=new StudentResDto();
             studentResDto.setName(student.getName());
             studentResDto.setDepartment(student.getDepartment());
-            studentResDto.setAge(studentResDto.getAge());
+            studentResDto.setAge(student.getAge());
             studentResDto.setMobNo(student.getMobNo());
 
             //preparing card DTO

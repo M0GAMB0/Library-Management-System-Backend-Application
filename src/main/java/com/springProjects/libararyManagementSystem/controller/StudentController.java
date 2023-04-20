@@ -18,30 +18,30 @@ public class StudentController {
 
     @Autowired
     StudentService studentService;
-    @PostMapping("/addStudent")
+    @PostMapping("/addStudent")//passed by PostMan
     public String addStudent(@RequestBody StudentReqDto studentReqDto){
         return studentService.addStudent(studentReqDto);
     }
 
     //update student's mobile number
-    @PutMapping("/update-mobile")
+    @PutMapping("/update-mobile")//passed by PostMan
     public UpdateStudentMobNoResDto updateMobNo(@RequestBody UpdateStudentMobNoReqDto updateStudentMobNoDto) throws StudentNotFoundException {
         return studentService.updateMobNo(updateStudentMobNoDto);
     }
     //delete a student by id
-    @DeleteMapping("/deleteStudent")
+    @DeleteMapping("/deleteStudent")//passed by PostMan
     public String deleteStudentById(@RequestBody IDReqDto idReqDto) throws StudentNotFoundException {
         return studentService.deleteStudentById(idReqDto);
     }
 
     //find a student by id
-    @GetMapping("/get-student")
+    @GetMapping("/get-student")//passed by PostMan
     public StudentResDto getStudentById(@RequestBody IDReqDto idReqDto) throws StudentNotFoundException {
         return studentService.getStudentById(idReqDto);
     }
 
     //find all the students
-    @GetMapping("/get-All-Students")
+    @GetMapping("/get-All-Students")//passed by PostMan
     public List<StudentResDto>  getAllStudents(){
         return studentService.getAllStudents();
     }

@@ -20,28 +20,26 @@ public class BookImpl implements BookService {
     @Autowired
     AuthorRepository authorRepository;
     @Override
-    public String addBook(BookReqDto bookReqDto) throws Exception {
-        Author author;
+    public String addBook(BookReqDto bookReqDto) throws AuthorNotFoundException {
         try{
-            author=authorRepository.findById(bookReqDto.getIdReqDto().getId()).get();
+            if(bookReqDto==null){
+                return "NuLL";
+            }
+            bookReqDto.println();
+            System.out.println("reached impl");
+            Book book=new Book();
+            Author author=authorRepository.findById(bookReqDto.getAuthor().getId()).get();
+            book.setAuthor(author);
+            book.setTitle(bookReqDto.getTitle());
+            book.setGenre(bookReqDto.getGenre());
+            book.setPrice(bookReqDto.getPrice());
+            book.setNoOfPages(bookReqDto.getNoOfPages());
+            authorRepository.save(author);
+
         }
         catch (Exception e){
-            throw new Exception("Author not present in Database.");
+            throw new AuthorNotFoundException("Invalid Author ID");
         }
-        //Converting DTO to Entity
-        Book book=new Book();
-        book.setAuthor(author);
-        book.setGenre(bookReqDto.getGenre());
-        book.setTitle(bookReqDto.getTitle());
-        book.setPrice(bookReqDto.getPrice());
-        book.setNoOfPages(bookReqDto.getNoOfPages());
-
-        //Updating author's data
-        author.getBooks().add(book);
-        book.setAuthor(author);
-        authorRepository.save(author);
-
-
         return "Book added";
     }
 
