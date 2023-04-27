@@ -6,12 +6,11 @@ import com.springProjects.libararyManagementSystem.DTOs.ResDto.BookResDto;
 import com.springProjects.libararyManagementSystem.exception.AuthorNotFoundException;
 import com.springProjects.libararyManagementSystem.service.BookService;
 import com.springProjects.libararyManagementSystem.service.impl.BookImpl;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
+@CrossOrigin(origins = "https://lucky-year-production.up.railway.app/")
 @RequestMapping("/book")
 @RestController
 public class BookController{
